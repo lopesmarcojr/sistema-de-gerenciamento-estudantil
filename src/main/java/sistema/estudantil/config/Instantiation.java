@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import sistema.estudantil.entities.Teacher;
+import sistema.estudantil.entities.Admin;
 import sistema.estudantil.repository.AdminRepository;
 
 @Configuration
@@ -21,9 +21,9 @@ public class Instantiation implements CommandLineRunner{
 		
 		adminRepository.deleteAll();
 		
-		Teacher erika = new Teacher(null, "Erika dos Santos", "erika@gmail.com", 12345678);
-		Teacher marco = new Teacher(null, "Marco Aurelio", "marco@gmail.com", 654321);
-		Teacher ana = new Teacher(null, "Ana Cristina", "ana@gmail.com", 19641203);
+		Admin erika = new Admin(null, "Erika dos Santos", "erika@gmail.com");
+		Admin marco = new Admin(null, "Marco Aurelio", "marco@gmail.com");
+		Admin ana = new Admin(null, "Ana Cristina", "ana@gmail.com");
 		
 		adminRepository.saveAll(Arrays.asList(erika,marco,ana));
 		
