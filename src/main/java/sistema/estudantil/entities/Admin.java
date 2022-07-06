@@ -1,6 +1,8 @@
 package sistema.estudantil.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -15,6 +17,8 @@ public class Admin implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	
+	private List<Teacher> teachers = new ArrayList<>();
 	
 	public Admin() {
 		
@@ -49,6 +53,14 @@ public class Admin implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<Teacher> getTeachers() {
+		return teachers;
+	}
+	
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
 	}
 
 	@Override
