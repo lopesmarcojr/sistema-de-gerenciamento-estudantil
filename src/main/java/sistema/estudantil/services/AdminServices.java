@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sistema.estudantil.dto.AdminDTO;
 import sistema.estudantil.entities.Admin;
 import sistema.estudantil.repository.AdminRepository;
 import sistema.estudantil.services.exception.ObjectNotFoundException;
@@ -25,4 +26,30 @@ public class AdminServices {
 		return admin.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 	
+	public Admin insert(Admin obj) {
+		return repository.insert(obj);
+	}
+	
+	
+	public Admin update(Admin obj) {
+		Optional<Admin> newObj = repository.findById(obj.getId());
+		Admin admin = newObj.get();
+		updateData(admin, obj);
+		return repository.save(admin);
+	}
+
+	private void updateData(Admin admin, Admin obj) {
+		admin.setName(obj.getName());
+		admin.setEmail(obj.getEmail());
+		
+	}
+	
+	public void delete(String id) {
+		findById(id);
+		repository.deleteById(id);
+	}
+	
+	public Admin fromDTO(AdminDTO adminDto) {
+		return new Admin(adminDto.getId(),adminDto.getName(), adminDto.getEmail());
+	}
 }
