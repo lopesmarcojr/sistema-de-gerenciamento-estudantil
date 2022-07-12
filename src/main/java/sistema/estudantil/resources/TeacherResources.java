@@ -44,7 +44,7 @@ public class TeacherResources {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@PathVariable String id,@RequestBody TeacherDTO teacherDto){
 		Teacher obj = services.fromDTO(teacherDto);
 		obj.setId(id);
@@ -52,7 +52,7 @@ public class TeacherResources {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable String id){
 		services.delete(id);
 		return ResponseEntity.noContent().build();

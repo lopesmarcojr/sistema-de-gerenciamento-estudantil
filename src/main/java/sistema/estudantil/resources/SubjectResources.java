@@ -44,7 +44,7 @@ public class SubjectResources {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Subject> update(@RequestBody SubjectDTO subjectDto,@PathVariable String id){
 		Subject obj = services.fromDTO(subjectDto);
 		obj.setId(id);
@@ -52,7 +52,7 @@ public class SubjectResources {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable String id){
 		services.delete(id);
 		return ResponseEntity.noContent().build();
