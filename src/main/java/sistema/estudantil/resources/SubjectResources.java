@@ -13,40 +13,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import sistema.estudantil.dto.TeacherDTO;
-import sistema.estudantil.entities.Teacher;
-import sistema.estudantil.services.TeacherServices;
+import sistema.estudantil.dto.SubjectDTO;
+import sistema.estudantil.entities.Subject;
+import sistema.estudantil.services.SubjectServices;
 
 @RestController
-@RequestMapping(value = "/teacher")
-public class TeacherResources {
+@RequestMapping(value = "/subject")
+public class SubjectResources {
 	
 	@Autowired
-	private TeacherServices services;
+	private SubjectServices services;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<TeacherDTO>> findAll(){
-		List<Teacher> list = services.findAll();
-		List<TeacherDTO> listDto = list.stream().map(x -> new TeacherDTO(x)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);	
+	public ResponseEntity<List<SubjectDTO>> findAll(){
+		List<Subject> list = services.findAll();
+		List<SubjectDTO> listDto = list.stream().map(x -> new SubjectDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<TeacherDTO> findById(@PathVariable String id) {
-		Teacher teacher = services.findById(id);
-		return ResponseEntity.ok().body(new TeacherDTO(teacher));
+	public ResponseEntity<SubjectDTO> findById(@PathVariable String id){
+		Subject subject = services.findById(id);
+		return ResponseEntity.ok().body(new SubjectDTO(subject));
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Teacher> insert(@RequestBody Teacher obj){
+	public ResponseEntity<Subject> insert(@RequestBody Subject obj){
 		obj = services.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable String id,@RequestBody TeacherDTO teacherDto){
-		Teacher obj = services.fromDTO(teacherDto);
+	public ResponseEntity<Subject> update(@RequestBody SubjectDTO subjectDto,@PathVariable String id){
+		Subject obj = services.fromDTO(subjectDto);
 		obj.setId(id);
 		obj = services.update(obj);
 		return ResponseEntity.noContent().build();
@@ -57,5 +57,6 @@ public class TeacherResources {
 		services.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 
 }

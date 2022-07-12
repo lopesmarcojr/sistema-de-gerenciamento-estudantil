@@ -32,7 +32,7 @@ public class StudentResources {
 		return ResponseEntity.ok().body(listDto);
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<StudentDTO> findById(@PathVariable String id){
 		Student student = services.findById(id);
 		return ResponseEntity.ok().body(new StudentDTO(student));
